@@ -22,5 +22,8 @@
   "author": "Mukul Agarwal",
   "license": "BSD-3-Clause",
   "private": false,
-  "dependencies": {}
+  "dependencies": {},
+  "pages": [
+    "index.js"
+  ]
 }
