@@ -15,17 +15,18 @@ class Transforms {
         `Not initialized with number. ${typeof val} not supported.`
       );
     }
-    this.records = [
-      {
-        iter: 0,
-        from: NaN,
-        to: val,
-      },
-    ];
+    this.records = [{
+      iter: 0,
+      from: NaN,
+      to: val,
+    }, ];
     this.initialized = true;
   }
 
-  addIterator(iterator) {
+  setIterator(iterator) {
+    if (iterator == undefined) {
+      throw new Error("No Iterator Passed");
+    }
     this.iterator = iterator;
   }
 
@@ -65,18 +66,22 @@ class Transforms {
     if (stop == undefined) {
       throw new Error("No Stopping Function.");
     }
+    let stopnow = false;
     let l = this.records.length;
-    let cv = this.getNext(this.records[l - 1].to);
-    while (cv !== NaN) {
+    let cv = this.iterator(this.getVals());
+    while (!(cv == NaN || cv == undefined || stopnow)) {
       this.addRecord(cv);
-      if (stop(this.getVals())) {
-        break;
-      }
-      cv = this.getNext(cv);
+      stopnow = stop({
+        startLength: l,
+        list: this.getVals(),
+      });
+      cv = this.iterator(this.getVals());
     }
     return this.records.length - l;
   }
-
+  drop(v) {
+    this.records = this.records.slice(0, this.records.length - v)
+  }
   getVals() {
     let vals = [];
     for (let i = 0; i < this.records.length; i++) {
