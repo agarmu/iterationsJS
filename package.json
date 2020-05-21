@@ -1,7 +1,7 @@
 {
   "name": "iterations",
-  "version": "0.1.1",
-  "description": "Unoptimized Collatz Conjecture Fun",
+  "version": "0.1.0",
+  "description": "Really bad iterative mathematics structure",
   "main": "index.js",
   "keywords": [
     "math",
@@ -23,7 +23,7 @@
   "license": "BSD-3-Clause",
   "private": false,
   "dependencies": {},
-  "pages": [
+  "files": [
     "index.js"
   ]
 }
