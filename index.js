@@ -1,18 +1,38 @@
 class Transforms {
   constructor(init) {
-    this.records = [{
-      iter: 0,
-      from: NaN,
-      to: init,
-    }, ];
-    this.getNext = () => {
-      return NaN
+    this.iterator = () => {
+      throw new Error("No Initialized Iterator.");
+    };
+    this.initialized = false;
+    if (init != undefined) {
+      this.initialize(init);
     }
   }
-  addIterator(iterator) {
-    this.iterator = iterator
+
+  initialize(val) {
+    if (typeof val != "number") {
+      throw new Error(
+        `Not initialized with number. ${typeof val} not supported.`
+      );
+    }
+    this.records = [
+      {
+        iter: 0,
+        from: NaN,
+        to: val,
+      },
+    ];
+    this.initialized = true;
   }
+
+  addIterator(iterator) {
+    this.iterator = iterator;
+  }
+
   addRecord(to) {
+    if (!this.initialized) {
+      throw new Error("Not Initialized with a value");
+    }
     const itr = this.records.length;
     const newRecord = {
       iter: itr,
@@ -24,6 +44,9 @@ class Transforms {
   }
 
   addRecords(...to) {
+    if (!this.initialized) {
+      throw new Error("Not Initialized with a value");
+    }
     for (let i = 0; i < to.length; i++) {
       const iter = this.records.length;
       this.records.push({
@@ -39,16 +62,19 @@ class Transforms {
   }
 
   iterate(stop) {
-    let l = this.records.length
+    if (stop == undefined) {
+      throw new Error("No Stopping Function.");
+    }
+    let l = this.records.length;
     let cv = this.getNext(this.records[l - 1].to);
     while (cv !== NaN) {
       this.addRecord(cv);
-      if (stop(cv)) {
-        break
+      if (stop(this.getVals())) {
+        break;
       }
       cv = this.getNext(cv);
     }
-    return (this.records.length - l)
+    return this.records.length - l;
   }
 
   getVals() {
@@ -56,7 +82,7 @@ class Transforms {
     for (let i = 0; i < this.records.length; i++) {
       vals.push(this.records[i].to);
     }
-    return vals
+    return vals;
   }
 }
 
