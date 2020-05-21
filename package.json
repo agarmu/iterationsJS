@@ -1,25 +1,26 @@
 {
-  "name": "collatzjs",
-  "version": "1.0.0",
+  "name": "iterations",
+  "version": "0.1.0",
   "description": "Unoptimized Collatz Conjecture Fun",
   "main": "index.js",
   "keywords": [
     "math",
     "mathematics",
-    "collatz"
+    "iterations"
   ],
   "scripts": {
     "test": "node index_test.js"
   },
-  "homepage": "https://github.com/agarmu/collatzJS#readme",
+  "homepage": "https://github.com/agarmu/iterationsJS#readme",
   "bugs": {
-    "url": "https://github.com/agarmu/collatzJS/issues"
+    "url": "https://github.com/agarmu/iterationsJS/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/agarmu/collatzJS.git"
+    "url": "git+https://github.com/agarmu/iterationsJS.git"
   },
-  "author": "Mukul Agarwal <agarmukul23@gmail.com>",
+  "author": "Mukul Agarwal",
   "license": "BSD-3-Clause",
-  "private": false
+  "private": false,
+  "dependencies": {}
 }

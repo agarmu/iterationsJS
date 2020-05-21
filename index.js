@@ -5,8 +5,13 @@ class Transforms {
       from: NaN,
       to: init,
     }, ];
+    this.getNext = () => {
+      return NaN
+    }
   }
-
+  addIterator(iterator) {
+    this.iterator = iterator
+  }
   addRecord(to) {
     const itr = this.records.length;
     const newRecord = {
@@ -33,15 +38,17 @@ class Transforms {
     );
   }
 
-  iterate(getNext, stopAt) {
-    let cv = getNext(this.records[this.records.length - 1].to);
+  iterate(stop) {
+    let l = this.records.length
+    let cv = this.getNext(this.records[l - 1].to);
     while (cv !== NaN) {
       this.addRecord(cv);
-      if (cv == stopAt) {
+      if (stop(cv)) {
         break
       }
-      cv = getNext(cv);
+      cv = this.getNext(cv);
     }
+    return (this.records.length - l)
   }
 
   getVals() {
@@ -49,27 +56,8 @@ class Transforms {
     for (let i = 0; i < this.records.length; i++) {
       vals.push(this.records[i].to);
     }
+    return vals
   }
 }
 
-collatz = new Transforms(20);
-
-
-collatz.iterate((val) => {
-  if (typeof val != "number" || val == NaN) {
-    v = NaN;
-  }
-  v = Math.floor(val);
-  if (v < 1) {
-    v = NaN;
-  }
-  if (v % 2 == 0) {
-    v = v / 2;
-  } else {
-    v = 3 * v + 1
-  }
-  return v
-
-}, 1);
-
-console.log(collatz.records)
+module.exports = Transforms;
