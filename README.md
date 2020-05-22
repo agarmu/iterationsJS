@@ -2,6 +2,9 @@
 
 ## Simple method for mathematical iteratives
 
+[_Published to npm as iterations_](https://www.npmjs.com/package/iterations)
+<br><br>
+
 Iterations JS is a simple package that is able to create mathematical iterative objects based on recursive formulas, e.g. fibonacci, etc.
 
 It is extremely easy to use this library in a Node.js project.
@@ -51,4 +54,4 @@ i.initialize(20)
 
 Keep in mind that any other iteratives tasks fail if i is not initialized.
 
-Refer to `/examples/collatz.js` and `/examples/fibonacci.js` in the GitHub repo for more context (keep in mind that you will have to change the local-based require tags to properly get functionality.)
+Refer to [`/ex/collatz.js`](./ex/collatz.js) and [`/ex/fibonacci.js`](./ex/fibonacci.js) in the GitHub repo for more context (keep in mind that you will have to change the local-based require tags to properly get functionality.)
